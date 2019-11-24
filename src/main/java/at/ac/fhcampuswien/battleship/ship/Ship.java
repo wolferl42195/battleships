@@ -65,12 +65,12 @@ public class Ship {
         return shipParts;
     }
 
-    private void generateShip(Position position, int length, Direction directions) {
+    private void generateShip(Position position, int length, Direction direction) {
         int x = position.getX();
         int y = position.getY();
         for (int i = 0; i < length; i++) {
             shipParts.add(new ShipPart(new Position(x,y)));
-            switch (directions) {
+            switch (direction) {
                 case UP:
                     y--;
                     break;

@@ -10,8 +10,7 @@ public class Field {
 
     private ArrayList<Ship> fleet = new ArrayList<>();
 
-    public ArrayList<Ship> getFleet()
-    {
+    public ArrayList<Ship> getFleet() {
         return fleet;
     }
 
@@ -27,9 +26,10 @@ public class Field {
     }
 
     /*Überprüft, ob man setzen darf.*/
-    private boolean isAreaFree(int x, int y, int length, Direction dir) {
-        for (int i = 0; i < length; i++)
-        {
+    private boolean isAreaFree(Position position, int length, Direction dir) {
+        int x = position.getX();
+        int y = position.getY();
+        for (int i = 0; i < length; i++) {
             /*Hier, nimmt es die Koordinaten und prüft ob es innerhalb vom Spielfeld liegt. Wenn nicht, returned er false und
             isAreaFree liefert in der setShip Methode false zurück (was dann passiert, steht in der setShip Methode)*/
             if (x < 0 || x > 9 || y < 0 || y > 9)
@@ -75,8 +75,8 @@ public class Field {
     . isFleetComplete. */
     private int shipCount(int length) {
         int count = 0;
-        for (Ship warship : this.fleet) {
-            if (warship.getLength() == length) {
+        for (Ship ship : this.fleet) {
+            if (ship.getLength() == length) {
                 count++;
             }
         }
@@ -90,34 +90,25 @@ public class Field {
         return ((this.shipCount(2) == 4 && this.shipCount(3) == 3 && this.shipCount(4) == 2 && this.shipCount(5) == 1));//es gibt 4 2er ,3 3er  ,2 4er und 1 5er
     }
 
-    public boolean setShip(int x, int y, int length, Direction dire, int diffvectorx, int diffvectory)
-    {
-
-    /*Zuerst überprüfen wir, ob die Anzahl der Schiffe, mit der Länge die wir gerade setzen wollen, nicht eh schon
-    erfüllt ist. Wenn schon, return false und brich ab.*/
-        switch (length)
-        {
+    public boolean setShip(int x, int y, int length, Direction dire, int diffvectorx, int diffvectory) {
+        switch (length) {
             case 2:
-                if (this.shipCount(length) >= 4)
-                {
+                if (this.shipCount(length) >= 4) {
                     return false;
                 }
                 break;
             case 3:
-                if (this.shipCount(length) >= 3)
-                {
+                if (this.shipCount(length) >= 3) {
                     return false;
                 }
                 break;
             case 4:
-                if (this.shipCount(length) >= 2)
-                {
+                if (this.shipCount(length) >= 2) {
                     return false;
                 }
                 break;
             case 5:
-                if (this.shipCount(length) >= 1)
-                {
+                if (this.shipCount(length) >= 1) {
                     return false;
                 }
                 break;
@@ -129,14 +120,13 @@ public class Field {
         wir am gewünschten Ort setzen dürfen. Wie?(steht oben beschrieben). Falls true, adden wir ein Objekt der
         Klasse Ship (also ein Schiff) zu unserer ArrayList fleet mittels dem Konstruktor der Klasse Ship. Wieso
         diffvectorx und y? Das steht in der main bei der Methode saveShips dabei.*/
-        if (isAreaFree(x, y, length, dire)) {
+
+        if (isAreaFree(new Position(x, y), length, dire)) {
             Position position = new Position(x, y);
             this.fleet.add(new Ship(position, length, dire, diffvectorx, diffvectory));
             return true;
-        } else
-        {
-            return false;
         }
+        return false;
     }
 
     /*Es überprüft für jedes Schiff der Flotte (ArrayList mit Schiffen) ob die x,y Koordinaten zutreffen. Wenn ja,
@@ -155,12 +145,9 @@ public class Field {
 /*Checkt für jeden ShipPart jedes Schiffes im fleet ArrayList, ob es destroyed ist. Wenn x und y auf ein ganzes
 Schiff zutreffen und checkIfDestroyed (Ship-Klasse) true liefert, returned es das zerstörte Schiff, ansonsten null.*/
     public Ship isDestroyed(int x, int y) {
-        for (Ship warship : this.fleet)
-        {
-            for (ShipPart part : warship.getShipParts())
-            {
-                if (part.getX() == x && part.getY() == y && warship.checkIfDestroyed())
-                {
+        for (Ship warship : this.fleet){
+            for (ShipPart part : warship.getShipParts()) {
+                if (part.getX() == x && part.getY() == y && warship.checkIfDestroyed()) {
                     return warship;
                 }
             }
@@ -169,12 +156,9 @@ Schiff zutreffen und checkIfDestroyed (Ship-Klasse) true liefert, returned es da
     }
 
     /*Es geht jedes Schiff durch und schaut ob es zerstört ist.*/
-    public boolean gameOver()
-    {
-        for (Ship warship : this.fleet)
-        {
-            if (!warship.checkIfDestroyed())
-            {
+    public boolean gameOver() {
+        for (Ship ship : this.fleet) {
+            if (!ship.checkIfDestroyed()) {
                 return false;
             }
         }
