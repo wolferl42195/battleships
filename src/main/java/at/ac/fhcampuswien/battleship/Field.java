@@ -29,19 +29,14 @@ public class Field {
         int x = position.getX();
         int y = position.getY();
         for (int i = 0; i < length; i++) {
-            /*Hier, nimmt es die Koordinaten und prüft ob es innerhalb vom Spielfeld liegt. Wenn nicht, returned er false und
-            isAreaFree liefert in der setShip Methode false zurück (was dann passiert, steht in der setShip Methode)*/
-            if (x < BattleShipConstants.MIN_FIELD_INDEX || x > BattleShipConstants.MAX_FIELD_INDEX || y < BattleShipConstants.MIN_FIELD_INDEX || y > BattleShipConstants.MAX_FIELD_INDEX) {
+            if (x < BattleShipConstants.MIN_FIELD_INDEX || x > BattleShipConstants.MAX_FIELD_INDEX ||
+                    y < BattleShipConstants.MIN_FIELD_INDEX || y > BattleShipConstants.MAX_FIELD_INDEX) {
                 return false;
             }
             if (!this.isFree(new Position(x,y))) {
                 return false;
             }
 
-            /*Wenn beide if-Bedienungen true zurück liefern, erhöhen wir entweder die x oder y Koordinate
-            abhängig von der Richtung. Wenn das Schiff nach oben zeigt, müssen wir y-- machen, um den nächsten 40
-            Pixelblock (== 1 ShipPart) zu überprüfen, ob da ein Schiff gesetzt werden darf. Das machen wir alles so
-            lang, wie die Länge von dem Schiff, das wir setzen wollen. (For-Schleife)*/
             switch (direction) {
                 case UP:
                     y--;
@@ -60,9 +55,7 @@ public class Field {
         return true;
     }
 
-    /*Es zählt wie viele Schiffe es in der Länge schon gibt, in der wir gerade anlegen wollen. Nimmt hier aber noch
-    keine Rücksicht darauf, ob es schon 4 in der Länge 2 z.B schon gibt. Das passiert erst in der setShip Methode bzw
-    . isFleetComplete. */
+
     private int shipCount(int length) {
         int count = 0;
         for (Ship ship : this.fleet) {

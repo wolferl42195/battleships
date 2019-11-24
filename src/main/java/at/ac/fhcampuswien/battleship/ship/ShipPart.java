@@ -8,15 +8,15 @@ public class ShipPart {
 
     private boolean damage;
 
-    public Position getPosition(){
-        return position;
-    }
-
-
     public ShipPart(Position position) {
         this.position = position;
         this.damage = false;
     }
+
+    public Position getPosition(){
+        return position;
+    }
+
 
     public boolean isDamaged() {
         return damage;
