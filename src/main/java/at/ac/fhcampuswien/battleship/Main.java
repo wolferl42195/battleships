@@ -23,8 +23,8 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 
-public class Main extends Application
-{
+public class Main extends Application {
+
     private Player player1 = new Player(true);
     private Player player2 = new Player(true);
     private double pressedX, pressedY;
@@ -411,8 +411,7 @@ public class Main extends Application
         }
     }
 
-    private void attacks(int x, int y)
-    {
+    private void attacks(int x, int y) {
         int a[];
         if (!(player1.area.gameOver() || player2.area.gameOver()))
         {
@@ -435,8 +434,7 @@ public class Main extends Application
                                 bombplay.stop();
                                 bombplay.play();
 
-                            } else
-                            {
+                            } else {
                                 drawMiss(x, y);
                                 player1.saveAttack(a[0], a[1]);
                                 activateMask();

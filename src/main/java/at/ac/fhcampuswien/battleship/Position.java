@@ -12,12 +12,14 @@ public class Position {
     }
 
     public int getX() {
-
         return x;
     }
 
     public int getY() {
-
         return y;
+    }
+
+    public boolean equals(Position position) {
+        return position.getX() == getX() && position.getY() == getY();
     }
 }

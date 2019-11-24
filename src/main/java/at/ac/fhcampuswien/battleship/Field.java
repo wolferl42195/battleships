@@ -15,12 +15,10 @@ public class Field {
         return fleet;
     }
 
-    /*Überprüft für alle Schiffe und deren ShipParts(zweite For Schleife), ob sie auf den jeweils übergebenen x,y
-    Koordinaten liegen.*/
-    private boolean isFree(int x, int y) {
+    private boolean isFree(Position position) {
         for (Ship warship : this.fleet) {
             for (ShipPart part : warship.getShipParts()) {
-                if (part.getX() == x && part.getY() == y) {
+                if (part.getPosition().equals(position)) {
                     return false;
                 }
             }
@@ -41,7 +39,7 @@ public class Field {
             }
 
             /*Überprüft, ob möglich zu setzen mit der isFree Methode. Wenn nicht, ebenfalls false.*/
-            if (!this.isFree(x, y))
+            if (!this.isFree(new Position(x,y)))
             {
                 return false;
             }
@@ -131,9 +129,9 @@ public class Field {
         wir am gewünschten Ort setzen dürfen. Wie?(steht oben beschrieben). Falls true, adden wir ein Objekt der
         Klasse Ship (also ein Schiff) zu unserer ArrayList fleet mittels dem Konstruktor der Klasse Ship. Wieso
         diffvectorx und y? Das steht in der main bei der Methode saveShips dabei.*/
-        if (isAreaFree(x, y, length, dire))
-        {
-            this.fleet.add(new Ship(x, y, length, dire, diffvectorx, diffvectory));
+        if (isAreaFree(x, y, length, dire)) {
+            Position position = new Position(x, y);
+            this.fleet.add(new Ship(position, length, dire, diffvectorx, diffvectory));
             return true;
         } else
         {
@@ -144,13 +142,10 @@ public class Field {
     /*Es überprüft für jedes Schiff der Flotte (ArrayList mit Schiffen) ob die x,y Koordinaten zutreffen. Wenn ja,
     dann werden die Koordinaten weitergegeben und die attack Methode in der Klasse Ship überprüft das gleiche für
     jeden ShipPart.*/
-    public boolean attack(int x, int y)
-    {
-
-        for (Ship warship : this.fleet)
-        {
-            if (warship.attack(x, y))
-            {
+    public boolean attack(int x, int y) {
+        Position position = new Position(x,y);
+        for (Ship warship : this.fleet) {
+            if (warship.attack(position)) {
                 return true;
             }
         }
@@ -159,8 +154,7 @@ public class Field {
     }
 /*Checkt für jeden ShipPart jedes Schiffes im fleet ArrayList, ob es destroyed ist. Wenn x und y auf ein ganzes
 Schiff zutreffen und checkIfDestroyed (Ship-Klasse) true liefert, returned es das zerstörte Schiff, ansonsten null.*/
-    public Ship isDestroyed(int x, int y)
-    {
+    public Ship isDestroyed(int x, int y) {
         for (Ship warship : this.fleet)
         {
             for (ShipPart part : warship.getShipParts())

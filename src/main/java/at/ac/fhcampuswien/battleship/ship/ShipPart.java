@@ -1,24 +1,28 @@
 package at.ac.fhcampuswien.battleship.ship;
 
+import at.ac.fhcampuswien.battleship.Position;
+
 public class ShipPart {
 
-    private int x;
-
-    private int y;
+    private Position position;
 
     private boolean damage;
 
     public int getX() {
-        return x;
+        return position.getX();
     }
 
     public int getY() {
-        return y;
+        return position.getY();
     }
 
-    public ShipPart(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Position getPosition(){
+        return position;
+    }
+
+
+    public ShipPart(Position position) {
+        this.position = position;
         this.damage = false;
     }
 

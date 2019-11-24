@@ -1,5 +1,7 @@
 package at.ac.fhcampuswien.battleship.ship;
 
+import at.ac.fhcampuswien.battleship.Position;
+
 import java.util.ArrayList;
 
 public class Ship {
@@ -12,12 +14,21 @@ public class Ship {
 
     private int y;
 
+    private Position position;
+
     private Direction direction;
 
     private int divx;
 
     private int divy;
 
+    public Ship(Position position, int length, Direction direction, int diffVectorX, int diffVectorY) {
+        this.position = position;
+        this.length = length;
+        this.divx = diffVectorX;
+        this.divy = diffVectorY;
+        generateShip(position, length, direction);
+    }
 
     public int getX()
     {
@@ -54,11 +65,12 @@ public class Ship {
         return shipParts;
     }
 
-    private void generateShip(int x, int y, int length, Direction directions) {
+    private void generateShip(Position position, int length, Direction directions) {
+        int x = position.getX();
+        int y = position.getY();
         for (int i = 0; i < length; i++) {
-            shipParts.add(new ShipPart(x, y));
-            switch (directions)
-            {
+            shipParts.add(new ShipPart(new Position(x,y)));
+            switch (directions) {
                 case UP:
                     y--;
                     break;
@@ -78,23 +90,9 @@ public class Ship {
         }
     }
 
-    public Ship(int x, int y, int length, Direction directions, int diffVectorX, int diffVectorY) {
-        this.x = x;
-        this.y = y;
-        this.direction = directions;
-        this.length = length;
-        this.divx = diffVectorX;
-        this.divy = diffVectorY;
-
-        generateShip(x, y, length, directions);
-    }
-
-    public boolean attack(int x, int y) {
+    public boolean attack(Position attackPosition) {
         for (ShipPart shippart : this.shipParts) {
-            if (shippart.getX() == x && shippart.getY() == y) {
-                shippart.destroy();
-                return true;
-            }
+               return shippart.getPosition().equals(attackPosition);
         }
         return false;
     }
