@@ -28,11 +28,10 @@ public class Field {
     private boolean isAreaFree(Position position, int length, Direction direction) {
         int x = position.getX();
         int y = position.getY();
-
         for (int i = 0; i < length; i++) {
             /*Hier, nimmt es die Koordinaten und prüft ob es innerhalb vom Spielfeld liegt. Wenn nicht, returned er false und
             isAreaFree liefert in der setShip Methode false zurück (was dann passiert, steht in der setShip Methode)*/
-            if (x < 0 || x > 9 || y < 0 || y > 9) {
+            if (x < BattleShipConstants.MIN_FIELD_INDEX || x > BattleShipConstants.MAX_FIELD_INDEX || y < BattleShipConstants.MIN_FIELD_INDEX || y > BattleShipConstants.MAX_FIELD_INDEX) {
                 return false;
             }
             if (!this.isFree(new Position(x,y))) {
@@ -75,10 +74,10 @@ public class Field {
     }
 
     public boolean isFleetComplete() {
-        return ((this.shipCount(2) == 4 &&
-                this.shipCount(3) == 3 &&
-                this.shipCount(4) == 2 &&
-                this.shipCount(5) == 1));
+        return ((this.shipCount(BattleShipConstants.SHIP_LENGTH_2) == BattleShipConstants.AMOUNT_SHIPS_SIZE_2 &&
+                this.shipCount(BattleShipConstants.SHIP_LENGTH_3) == BattleShipConstants.AMOUNT_SHIPS_SIZE_3 &&
+                this.shipCount(BattleShipConstants.SHIP_LENGTH_4) == BattleShipConstants.AMOUNT_SHIPS_SIZE_4 &&
+                this.shipCount(BattleShipConstants.SHIP_LENGTH_5) == BattleShipConstants.AMOUNT_SHIPS_SIZE_5));
     }
 
     public boolean setShip(Position position, int length, Direction direction, int diffvectorx, int diffvectory) {

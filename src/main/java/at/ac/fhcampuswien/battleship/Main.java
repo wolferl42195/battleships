@@ -334,7 +334,7 @@ public class Main extends Application {
                 int a[] = calculateXY(imageship.getX(), imageship.getY(), p1x, p1y, p2x, p2y);
 
                 if (a != null) {
-                    if (player.area.setShip(new Position(a[0], a[1]), imageship.getLength(), imageship.getDirection(), imageship.getDiffVectorX(), imageship.getDiffVectorY())) {
+                    if (player.setShip(new Position(a[0], a[1]), imageship.getLength(), imageship.getDirection(), imageship.getDiffVectorX(), imageship.getDiffVectorY())) {
                         imageship.lock();
 
                     } else {
@@ -347,7 +347,7 @@ public class Main extends Application {
                 }
             }
         }
-        if (player.area.isFleetComplete()) {
+        if (player.isFleetComplete()) {
             gameRound++;
             if (player == player1) {
                 changeMask();
@@ -359,7 +359,7 @@ public class Main extends Application {
                 seeShips2.setVisible(true);
                 indicate1.setVisible(true);
             }
-            if (player1.area.isFleetComplete() && player2.area.isFleetComplete()) {
+            if (player1.isFleetComplete() && player2.isFleetComplete()) {
                 activateMask();
             }
         }
@@ -367,13 +367,13 @@ public class Main extends Application {
 
     private void attacks(int x, int y) {
         int a[];
-        if (!(player1.area.checkGameOver() || player2.area.checkGameOver())) {
+        if (!(player1.checkGameOver() || player2.checkGameOver())) {
             if (shipsComplete) {
                 if (gameRound % 2 == 1) {
                     a = calculateXY(x, y, 440 + 40, 40 + 40, 440 + 440, 440 + 40);
                     if (a != null) {
                         if (player1.attackPossible(new Position(a[0], a[1]))) {
-                            if (player2.area.attack(new Position(a[0], a[1]))) {
+                            if (player2.attack(new Position(a[0], a[1]))) {
                                 drawAttack(a[0], a[1], x, y, player2);
                                 player1.saveAttack(a[0], a[1]);
                                 activateMask();
@@ -390,7 +390,7 @@ public class Main extends Application {
                             }
                         }
                     }
-                    if (player2.area.checkGameOver()) {
+                    if (player2.checkGameOver()) {
                         //System.out.println("Spieler 1 hat gewonnen");
                         deactivateMask();
                         seeShips1.setVisible(false);
@@ -411,7 +411,7 @@ public class Main extends Application {
                     a = calculateXY(x, y, 440 + 40 + 10 * 40 + 2 * 40, 40 + 40, 440 + 440 + 440 + 40, 440 + 40);
                     if (a != null) {
                         if (player2.attackPossible(new Position(a[0], a[1]))) {
-                            if (player1.area.attack(new Position(a[0], a[1]))) {
+                            if (player1.attack(new Position(a[0], a[1]))) {
                                 drawAttack(a[0], a[1], x, y, player1);
                                 player2.saveAttack(a[0], a[1]);
                                 activateMask();
@@ -428,7 +428,7 @@ public class Main extends Application {
                             }
                         }
                     }
-                    if (player1.area.checkGameOver()) {
+                    if (player1.checkGameOver()) {
                         //System.out.println("Spieler 2 hat gewonnen");
                         deactivateMask();
                         seeShips1.setVisible(false);
@@ -481,7 +481,7 @@ public class Main extends Application {
         Image image = new Image(BattleShipConstants.FILE_SHIP_SIZE2_DESTROYED);
         /*Objekt ship wird entweder null oder ein Schiff zugewiesen (Siehe Klasse Ship, Methode isDestroyed). Wenn
         das Schiff zerstört ist, wird im switch case gefragt welche Länge und dementsprechen setzen wir das Schiff*/
-        Ship ship = player.area.isDestroyed(new Position(xx, yy));
+        Ship ship = player.isDestroyed(new Position(xx, yy));
 
         if (ship != null) {
             //System.out.println("zerstört");
@@ -525,7 +525,7 @@ public class Main extends Application {
     }
 
     private void shipsComplete() {
-        if (player1.area.isFleetComplete() && player2.area.isFleetComplete()) {
+        if (player1.isFleetComplete() && player2.isFleetComplete()) {
             this.shipsComplete = true;
         }
     }
@@ -538,8 +538,8 @@ public class Main extends Application {
             imageShip0[i].reset();
             imageShip1[i].reset();
         }
-        player1.area.removeAll();
-        player2.area.removeAll();
+        player1.removeAll();
+        player2.removeAll();
         player1.reset();
         player2.reset();
         gameRound = 1;

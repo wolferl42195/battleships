@@ -8,14 +8,6 @@ public class ShipPart {
 
     private boolean damage;
 
-    public int getX() {
-        return position.getX();
-    }
-
-    public int getY() {
-        return position.getY();
-    }
-
     public Position getPosition(){
         return position;
     }

@@ -7,6 +7,15 @@ public class BattleShipConstants {
     public static final int SHIP_LENGTH_4 = 4;
     public static final int SHIP_LENGTH_5 = 5;
 
+    public static final int AMOUNT_SHIPS_SIZE_2 = 4;
+    public static final int AMOUNT_SHIPS_SIZE_3 = 3;
+    public static final int AMOUNT_SHIPS_SIZE_4 = 2;
+    public static final int AMOUNT_SHIPS_SIZE_5 = 1;
+
+    public static final int MIN_FIELD_INDEX = 0;
+    public static final int MAX_FIELD_INDEX = 9;
+
+
     public static final String TEXT_SAVE_SHIPS = "Schiffe speichern";
     public static final String TEXT_NEW_GAME = "Neues Spiel";
     public static final String TEXT_SHOW_SHIPS = "Zeige meine Schiffe";

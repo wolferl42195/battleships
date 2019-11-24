@@ -1,13 +1,14 @@
 package at.ac.fhcampuswien.battleship;
 
 import at.ac.fhcampuswien.battleship.ship.Direction;
+import at.ac.fhcampuswien.battleship.ship.Ship;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Player {
 
-    Field area = new Field();
+    private Field area = new Field();
 
     private ArrayList<Position> attackPositions = new ArrayList<>();
 
@@ -41,6 +42,25 @@ public class Player {
         isHuman = human;
     }
 
+   public boolean setShip(Position position, int length, Direction direction, int diffvectorx, int diffvectory) {
+        return area.setShip(position, length, direction, diffvectorx, diffvectory);
+   }
+
+   public boolean isFleetComplete(){
+        return area.isFleetComplete();
+   }
+
+   public boolean checkGameOver(){
+        return area.checkGameOver();
+   }
+
+   public void  removeAll(){
+        area.removeAll();
+   }
+
+    public boolean attack(Position position) {
+        return area.attack(position);
+    }
 
     public boolean AISet() {
         if (!isHuman) {
@@ -110,28 +130,23 @@ public class Player {
                 x = random.nextInt((9 - 0) + 1) + 0;
                 y = random.nextInt((9 - 0) + 1) + 0;
             } while (this.attackPossible(new Position(x, y)));
+
             this.saveAttack(x, y);
             result = enemy.area.attack(new Position(x, y));
-            if (enemy.area.isDestroyed(new Position(x, y)) != null)
-            {
+            if (enemy.area.isDestroyed(new Position(x, y)) != null) {
                 return true;
-            } else if (!result)
-            {
+            } else if (!result) {
                 return false;
-            } else
-            {
+            } else {
                 AIsave = new ArrayList<>();
                 AIsave.add(new AIsave(new Position(x, y), false));
             }
-        } else if (AIsave.get(0).getDirection() == null)
-        {
+        } else if (AIsave.get(0).getDirection() == null) {
             direction = Direction.DOWN;
             x = AIsave.get(0).getX();
             y = AIsave.get(0).getY();
-            do
-            {
-                switch (random.nextInt((3 - 0) + 1) + 0)
-                {
+            do {
+                switch (random.nextInt((3 - 0) + 1) + 0) {
                     case 0:
                         direction = Direction.RIGHT;
                         x++;
@@ -152,20 +167,16 @@ public class Player {
             } while (this.attackPossible(new Position(x, y)));
             result = enemy.area.attack(new Position(x, y));
             this.saveAttack(x, y);
-            if (result)
-            {
+            if (result) {
                 AIsave.add(new AIsave(new Position(x, y), direction, true));
                 return true;
-            } else
-            {
+            } else {
                 return false;
             }
-        } else
-        {
+        } else {
             x = AIsave.get(0).getX();
             y = AIsave.get(0).getY();
-            switch (AIsave.get(0).getDirection())
-            {
+            switch (AIsave.get(0).getDirection()) {
                 case RIGHT:
                     x += (int) AIsave.size();
                     break;
@@ -179,16 +190,13 @@ public class Player {
                     y -= (int) AIsave.size();
                     break;
             }
-            if (this.attackPossible(new Position(x, y)))
-            {
+            if (this.attackPossible(new Position(x, y))) {
                 this.saveAttack(x, y);
                 result = enemy.area.attack(new Position(x, y));
-                if (result)
-                {
+                if (result) {
                     AIsave.add(new AIsave(new Position(x, y), AIsave.get(0).getDirection(), false));
                     return result;
-                } else
-                {
+                } else {
                     switch (AIsave.get(0).getDirection()) {
                         case RIGHT:
                             x--;
@@ -234,5 +242,9 @@ public class Player {
             }
         }
         return false;
+    }
+
+    public Ship isDestroyed(Position position) {
+        return area.isDestroyed(position);
     }
 }

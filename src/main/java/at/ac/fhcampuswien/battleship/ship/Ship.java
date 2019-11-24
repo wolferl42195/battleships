@@ -71,15 +71,12 @@ public class Ship {
                 case UP:
                     y--;
                     break;
-
                 case RIGHT:
                     x++;
                     break;
-
                 case LEFT:
                     x--;
                     break;
-
                 case DOWN:
                     y++;
                     break;
