@@ -1,4 +1,4 @@
-package sample;
+package at.ac.fhcampuswien.battleship;
 
 /*Ganz kurz erklärt: enum (enumeration --> Aufzählung) kann alles sein. Wir legen fest, Objekte dieser Klasse dürfen
 nur die Vier Werte annehmen. Für Java bedeuten die Wörter selbst gar nichts, das ist nur für uns. Da könnte auch
