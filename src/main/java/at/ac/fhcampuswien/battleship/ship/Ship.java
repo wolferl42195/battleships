@@ -1,4 +1,4 @@
-package at.ac.fhcampuswien.battleship;
+package at.ac.fhcampuswien.battleship.ship;
 
 import java.util.ArrayList;
 

@@ -1,12 +1,11 @@
-package at.ac.fhcampuswien.battleship;
+package at.ac.fhcampuswien.battleship.ship;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.image.ImageView;
 
-public class ImageShip
-{
+public class ImageShip {
     private int x, y, length;
     private int rotate = 1;
     private int beginX, beginY;
