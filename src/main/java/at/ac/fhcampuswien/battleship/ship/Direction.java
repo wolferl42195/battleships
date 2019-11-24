@@ -1,6 +1,5 @@
 package at.ac.fhcampuswien.battleship.ship;
 
-public enum Direction
-{
+public enum Direction {
     UP, DOWN, RIGHT, LEFT
 }

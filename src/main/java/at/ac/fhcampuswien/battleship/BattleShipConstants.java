@@ -2,6 +2,11 @@ package at.ac.fhcampuswien.battleship;
 
 public class BattleShipConstants {
 
+    public static final int SHIP_LENGTH_2 = 2;
+    public static final int SHIP_LENGTH_3 = 3;
+    public static final int SHIP_LENGTH_4 = 4;
+    public static final int SHIP_LENGTH_5 = 5;
+
     public static final String TEXT_SAVE_SHIPS = "Schiffe speichern";
     public static final String TEXT_NEW_GAME = "Neues Spiel";
     public static final String TEXT_SHOW_SHIPS = "Zeige meine Schiffe";
@@ -31,6 +36,7 @@ public class BattleShipConstants {
     public static final String SOUND_MISS = "res/miss.wav";
     public static final String SOUND_BACKGROUND_MUSIC = "res/music.wav";
     public static final String SOUND_WINNER = "res/winner.wav";
+
 }
 
 

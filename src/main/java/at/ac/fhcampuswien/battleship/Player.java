@@ -112,7 +112,7 @@ public class Player {
             } while (this.attackPossible(new Position(x, y)));
             this.saveAttack(x, y);
             result = enemy.area.attack(new Position(x, y));
-            if (enemy.area.isDestroyed(x, y) != null)
+            if (enemy.area.isDestroyed(new Position(x, y)) != null)
             {
                 return true;
             } else if (!result)

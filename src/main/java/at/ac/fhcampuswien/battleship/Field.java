@@ -25,9 +25,10 @@ public class Field {
         return true;
     }
 
-    private boolean isAreaFree(Position position, int length, Direction dir) {
+    private boolean isAreaFree(Position position, int length, Direction direction) {
         int x = position.getX();
         int y = position.getY();
+
         for (int i = 0; i < length; i++) {
             /*Hier, nimmt es die Koordinaten und prüft ob es innerhalb vom Spielfeld liegt. Wenn nicht, returned er false und
             isAreaFree liefert in der setShip Methode false zurück (was dann passiert, steht in der setShip Methode)*/
@@ -42,7 +43,7 @@ public class Field {
             abhängig von der Richtung. Wenn das Schiff nach oben zeigt, müssen wir y-- machen, um den nächsten 40
             Pixelblock (== 1 ShipPart) zu überprüfen, ob da ein Schiff gesetzt werden darf. Das machen wir alles so
             lang, wie die Länge von dem Schiff, das wir setzen wollen. (For-Schleife)*/
-            switch (dir) {
+            switch (direction) {
                 case UP:
                     y--;
                     break;
@@ -82,22 +83,22 @@ public class Field {
 
     public boolean setShip(Position position, int length, Direction direction, int diffvectorx, int diffvectory) {
         switch (length) {
-            case 2:
+            case BattleShipConstants.SHIP_LENGTH_2:
                 if (this.shipCount(length) >= 4) {
                     return false;
                 }
                 break;
-            case 3:
+            case BattleShipConstants.SHIP_LENGTH_3:
                 if (this.shipCount(length) >= 3) {
                     return false;
                 }
                 break;
-            case 4:
+            case BattleShipConstants.SHIP_LENGTH_4:
                 if (this.shipCount(length) >= 2) {
                     return false;
                 }
                 break;
-            case 5:
+            case BattleShipConstants.SHIP_LENGTH_5:
                 if (this.shipCount(length) >= 1) {
                     return false;
                 }
@@ -128,23 +129,28 @@ public class Field {
             }
         }
         return false;
-
     }
+
+
 /*Checkt für jeden ShipPart jedes Schiffes im fleet ArrayList, ob es destroyed ist. Wenn x und y auf ein ganzes
 Schiff zutreffen und checkIfDestroyed (Ship-Klasse) true liefert, returned es das zerstörte Schiff, ansonsten null.*/
-    public Ship isDestroyed(int x, int y) {
-        for (Ship warship : this.fleet){
-            for (ShipPart part : warship.getShipParts()) {
-                if (part.getX() == x && part.getY() == y && warship.checkIfDestroyed()) {
-                    return warship;
+    public Ship isDestroyed(Position position) {
+        for (Ship ship : this.fleet){
+            for (ShipPart part : ship.getShipParts()) {
+                if (part.getPosition().equals(position) && ship.checkIfDestroyed()) {
+                    return ship;
                 }
             }
         }
         return null;
     }
 
-    /*Es geht jedes Schiff durch und schaut ob es zerstört ist.*/
-    public boolean gameOver() {
+    /**
+     * Checks if all ships are destroyed and the game is over
+     *
+     * @return true if all ships are destroyed
+     */
+    public boolean checkGameOver() {
         for (Ship ship : this.fleet) {
             if (!ship.checkIfDestroyed()) {
                 return false;
@@ -153,11 +159,11 @@ Schiff zutreffen und checkIfDestroyed (Ship-Klasse) true liefert, returned es da
         return true;
     }
 
-    /*Verwendung: reset Methode in der Main. Wenn reset aufgerufen wird, wird removeAll aktiviert, bedeutet, dass wir
-    eine neue ArrayList fleet erstellen (die alte wird gelöscht quasi).*/
+    /**
+     *  The whole fleet will be deleted
+     *
+     */
     public void removeAll() {
         this.fleet = new ArrayList<>(0);
     }
-
-
 }

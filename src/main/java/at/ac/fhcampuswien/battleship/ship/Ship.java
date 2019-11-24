@@ -10,10 +10,6 @@ public class Ship {
 
     private int length;
 
-    private int x;
-
-    private int y;
-
     private Position position;
 
     private Direction direction;
@@ -27,17 +23,18 @@ public class Ship {
         this.length = length;
         this.divx = diffVectorX;
         this.divy = diffVectorY;
+        this.direction = direction;
         generateShip(position, length, direction);
     }
 
     public int getX()
     {
-        return x;
+        return position.getX();
     }
 
     public int getY()
     {
-        return y;
+        return position.getY();
     }
 
     public int getDivx()
