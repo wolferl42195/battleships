@@ -22,6 +22,8 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 
+import static at.ac.fhcampuswien.battleship.BattleShipConstants.*;
+
 
 public class Main extends Application {
 
@@ -31,67 +33,67 @@ public class Main extends Application {
     private int gameRound = 1;
     private boolean shipsComplete = false;
 
-    private Button buttonSaveShipsLeft  = new Button(BattleShipConstants.TEXT_SAVE_SHIPS);
-    private Button buttonSaveShipsRight = new Button(BattleShipConstants.TEXT_SAVE_SHIPS);
-    private Button newGame = new Button(BattleShipConstants.TEXT_NEW_GAME);
-    private Button exit = new Button(BattleShipConstants.TEXT_EXIT_GAME);
-    private Button reset = new Button(BattleShipConstants.TEXT_RESTART);
-    private Button seeShips1 = new Button(BattleShipConstants.TEXT_SHOW_SHIPS);
-    private Button seeShips2 = new Button(BattleShipConstants.TEXT_SHOW_SHIPS);
-    private Button cont = new Button(BattleShipConstants.TEXT_PROCESS);
+    private Button buttonSaveShipsLeft  = new Button(TEXT_SAVE_SHIPS);
+    private Button buttonSaveShipsRight = new Button(TEXT_SAVE_SHIPS);
+    private Button newGame = new Button(TEXT_NEW_GAME);
+    private Button exit = new Button(TEXT_EXIT_GAME);
+    private Button reset = new Button(TEXT_RESTART);
+    private Button seeShips1 = new Button(TEXT_SHOW_SHIPS);
+    private Button seeShips2 = new Button(TEXT_SHOW_SHIPS);
+    private Button cont = new Button(TEXT_PROCESS);
 
-    private ImageView startMenu = new ImageView(BattleShipConstants.FILE_START);
-    private ImageView wonLeft = new ImageView(BattleShipConstants.FILE_PLAYER1_WON);
-    private ImageView wonRight = new ImageView(BattleShipConstants.FILE_PLAYER2_WON);
-    private ImageView maskLeftField = new ImageView(BattleShipConstants.FILE_ISLAND1);
-    private ImageView maskRightField = new ImageView(BattleShipConstants.FILE_ISLAND2);
+    private ImageView startMenu = new ImageView(FILE_START);
+    private ImageView wonLeft = new ImageView(FILE_PLAYER1_WON);
+    private ImageView wonRight = new ImageView(FILE_PLAYER2_WON);
+    private ImageView maskLeftField = new ImageView(FILE_ISLAND1);
+    private ImageView maskRightField = new ImageView(FILE_ISLAND2);
 
     private Rectangle indicate1 = new Rectangle(439, 481, 442, 7);
     private Rectangle indicate2 = new Rectangle(919, 481, 442, 7);
 
 
-    private Media bomb = new Media(new File(BattleShipConstants.SOUND_BOMB).toURI().toString());
+    private Media bomb = new Media(new File(SOUND_BOMB).toURI().toString());
     private MediaPlayer bombPlayer = new MediaPlayer(bomb);
-    private Media miss = new Media(new File(BattleShipConstants.SOUND_MISS).toURI().toString());
+    private Media miss = new Media(new File(SOUND_MISS).toURI().toString());
 
 
     private MediaPlayer missPlayer = new MediaPlayer(miss);
-    private Media music = new Media(new File(BattleShipConstants.SOUND_BACKGROUND_MUSIC).toURI().toString());
+    private Media music = new Media(new File(SOUND_BACKGROUND_MUSIC).toURI().toString());
     private MediaPlayer musicPlayer = new MediaPlayer(music);
-    private Media winner = new Media(new File(BattleShipConstants.SOUND_WINNER).toURI().toString());
+    private Media winner = new Media(new File(SOUND_WINNER).toURI().toString());
     private MediaPlayer winnerPlayer = new MediaPlayer(winner);
 
     private Image[] bships = {
-            new Image(BattleShipConstants.FILE_SHIP_SIZE2),
-            new Image(BattleShipConstants.FILE_SHIP_SIZE3),
-            new Image(BattleShipConstants.FILE_SHIP_SIZE4),
-            new Image(BattleShipConstants.FILE_SHIP_SIZE5)
+            new Image(FILE_SHIP_SIZE2),
+            new Image(FILE_SHIP_SIZE3),
+            new Image(FILE_SHIP_SIZE4),
+            new Image(FILE_SHIP_SIZE5)
     };
 
     private ImageShip[] imageShip1 = {
-            new ImageShip(1520, 640, 2, bships[0]),
-            new ImageShip(1520, 640, 2, bships[0]),
-            new ImageShip(1520, 640, 2, bships[0]),
-            new ImageShip(1520, 640, 2, bships[0]),
-            new ImageShip(1520, 720, 3, bships[1]),
-            new ImageShip(1520, 720, 3, bships[1]),
-            new ImageShip(1520, 720, 3, bships[1]),
-            new ImageShip(1520, 800, 4, bships[2]),
-            new ImageShip(1520, 800, 4, bships[2]),
-            new ImageShip(1520, 880, 5, bships[3])
+            new ImageShip(1520, 640, SHIP_LENGTH_2, bships[0]),
+            new ImageShip(1520, 640, SHIP_LENGTH_2, bships[0]),
+            new ImageShip(1520, 640, SHIP_LENGTH_2, bships[0]),
+            new ImageShip(1520, 640, SHIP_LENGTH_2, bships[0]),
+            new ImageShip(1520, 720, SHIP_LENGTH_3, bships[1]),
+            new ImageShip(1520, 720, SHIP_LENGTH_3, bships[1]),
+            new ImageShip(1520, 720, SHIP_LENGTH_3, bships[1]),
+            new ImageShip(1520, 800, SHIP_LENGTH_4, bships[2]),
+            new ImageShip(1520, 800, SHIP_LENGTH_4, bships[2]),
+            new ImageShip(1520, 880, SHIP_LENGTH_5, bships[3])
     };
 
     private ImageShip[] imageShip0 = {
-            new ImageShip(1800 - 1520 - 3 * 40, 640, 2, bships[0]),
-            new ImageShip(1800 - 1520 - 3 * 40, 640, 2, bships[0]),
-            new ImageShip(1800 - 1520 - 3 * 40, 640, 2, bships[0]),
-            new ImageShip(1800 - 1520 - 3 * 40, 640, 2, bships[0]),
-            new ImageShip(1800 - 1520 - 3 * 40, 720, 3, bships[1]),
-            new ImageShip(1800 - 1520 - 3 * 40, 720, 3, bships[1]),
-            new ImageShip(1800 - 1520 - 3 * 40, 720, 3, bships[1]),
-            new ImageShip(1800 - 1520 - 3 * 40, 800, 4, bships[2]),
-            new ImageShip(1800 - 1520 - 3 * 40, 800, 4, bships[2]),
-            new ImageShip(1800 - 1520 - 3 * 40, 880, 5, bships[3])
+            new ImageShip(1800 - 1520 - 3 * 40, 640, SHIP_LENGTH_2, bships[0]),
+            new ImageShip(1800 - 1520 - 3 * 40, 640, SHIP_LENGTH_2, bships[0]),
+            new ImageShip(1800 - 1520 - 3 * 40, 640, SHIP_LENGTH_2, bships[0]),
+            new ImageShip(1800 - 1520 - 3 * 40, 640, SHIP_LENGTH_2, bships[0]),
+            new ImageShip(1800 - 1520 - 3 * 40, 720, SHIP_LENGTH_3, bships[1]),
+            new ImageShip(1800 - 1520 - 3 * 40, 720, SHIP_LENGTH_3, bships[1]),
+            new ImageShip(1800 - 1520 - 3 * 40, 720, SHIP_LENGTH_3, bships[1]),
+            new ImageShip(1800 - 1520 - 3 * 40, 800, SHIP_LENGTH_4, bships[2]),
+            new ImageShip(1800 - 1520 - 3 * 40, 800, SHIP_LENGTH_4, bships[2]),
+            new ImageShip(1800 - 1520 - 3 * 40, 880, SHIP_LENGTH_5, bships[3])
     };
 
 
@@ -216,7 +218,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage)  {
-        BackgroundImage background = new BackgroundImage(new Image(BattleShipConstants.FILE_BACKGROUND, 1800, 1000,
+        BackgroundImage background = new BackgroundImage(new Image(FILE_BACKGROUND, 1800, 1000,
                 true, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
 
@@ -265,7 +267,6 @@ public class Main extends Application {
         );
 
         battleShipContainer.getChildren().add(newGame);
-
 
         exit.setLayoutX(700);
         exit.setLayoutY(500);
@@ -455,7 +456,7 @@ public class Main extends Application {
         x -= diffx;
         int diffy = (int) y % 40;
         y -= diffy;
-        ImageView miss = new ImageView(BattleShipConstants.FILE_WATERHITMARKER);
+        ImageView miss = new ImageView(FILE_WATERHITMARKER);
         miss.setX(x);
         miss.setY(y);
         battleShipContainer.getChildren().add(miss);
@@ -472,33 +473,32 @@ public class Main extends Application {
         int diffy = (int) yreal % 40;
         yreal -= diffy;
 
-        ImageView hit = new ImageView(BattleShipConstants.FILE_HIT);
+        ImageView hit = new ImageView(FILE_HIT);
         hit.setX(xreal);
         hit.setY(yreal);
         battleShipContainer.getChildren().addAll(hit);
 
 
-        Image image = new Image(BattleShipConstants.FILE_SHIP_SIZE2_DESTROYED);
+        Image image = new Image(FILE_SHIP_SIZE2_DESTROYED);
         /*Objekt ship wird entweder null oder ein Schiff zugewiesen (Siehe Klasse Ship, Methode isDestroyed). Wenn
         das Schiff zerstört ist, wird im switch case gefragt welche Länge und dementsprechen setzen wir das Schiff*/
         Ship ship = player.isDestroyed(new Position(xx, yy));
 
         if (ship != null) {
-            //System.out.println("zerstört");
             switch (ship.getLength()) {
                 case 0:
                     break;
-                case 2:
-                    image = new Image(BattleShipConstants.FILE_SHIP_SIZE2_DESTROYED);
+                case SHIP_LENGTH_2:
+                    image = new Image(FILE_SHIP_SIZE2_DESTROYED);
                     break;
-                case 3:
-                    image = new Image(BattleShipConstants.FILE_SHIP_SIZE3_DESTROYED);
+                case SHIP_LENGTH_3:
+                    image = new Image(FILE_SHIP_SIZE3_DESTROYED);
                     break;
-                case 4:
-                    image = new Image(BattleShipConstants.FILE_SHIP_SIZE4_DESTROYED);
+                case SHIP_LENGTH_4:
+                    image = new Image(FILE_SHIP_SIZE4_DESTROYED);
                     break;
-                case 5:
-                    image = new Image(BattleShipConstants.FILE_SHIP_SIZE5_DESTROYED);
+                case SHIP_LENGTH_5:
+                    image = new Image(FILE_SHIP_SIZE5_DESTROYED);
                     break;
             }
 
@@ -531,7 +531,6 @@ public class Main extends Application {
         }
     }
 
-    //Für einzelne Methoden, siehe entsprechende Klassen. Canvas wird zurückgesetzt
     private void reset() {
         for (int i = 0; i < imageShip0.length; i++) {
             imageShip1[i].rotateTo(Direction.RIGHT);
@@ -548,7 +547,7 @@ public class Main extends Application {
         buttonSaveShipsRight.setVisible(true);
         buttonSaveShipsLeft.setVisible(true);
         battleShipContainer = new Pane();
-        BackgroundImage background = new BackgroundImage(new Image("file:res/BattleshipsBackground.png", 1800, 1000,
+        BackgroundImage background = new BackgroundImage(new Image(FILE_BACKGROUND, 1800, 1000,
                 true, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
 
