@@ -25,22 +25,16 @@ public class Field {
         return true;
     }
 
-    /*Überprüft, ob man setzen darf.*/
     private boolean isAreaFree(Position position, int length, Direction dir) {
         int x = position.getX();
         int y = position.getY();
         for (int i = 0; i < length; i++) {
             /*Hier, nimmt es die Koordinaten und prüft ob es innerhalb vom Spielfeld liegt. Wenn nicht, returned er false und
             isAreaFree liefert in der setShip Methode false zurück (was dann passiert, steht in der setShip Methode)*/
-            if (x < 0 || x > 9 || y < 0 || y > 9)
-            {
-                //  System.out.println("anlegen x= "+x +" y= "+y);
+            if (x < 0 || x > 9 || y < 0 || y > 9) {
                 return false;
             }
-
-            /*Überprüft, ob möglich zu setzen mit der isFree Methode. Wenn nicht, ebenfalls false.*/
-            if (!this.isFree(new Position(x,y)))
-            {
+            if (!this.isFree(new Position(x,y))) {
                 return false;
             }
 
@@ -48,20 +42,16 @@ public class Field {
             abhängig von der Richtung. Wenn das Schiff nach oben zeigt, müssen wir y-- machen, um den nächsten 40
             Pixelblock (== 1 ShipPart) zu überprüfen, ob da ein Schiff gesetzt werden darf. Das machen wir alles so
             lang, wie die Länge von dem Schiff, das wir setzen wollen. (For-Schleife)*/
-            switch (dir)
-            {
+            switch (dir) {
                 case UP:
                     y--;
                     break;
-
                 case RIGHT:
                     x++;
                     break;
-
                 case LEFT:
                     x--;
                     break;
-
                 case DOWN:
                     y++;
                     break;
@@ -83,11 +73,11 @@ public class Field {
         return count;
     }
 
-    /*Liefert true zurück, wenn die folgenden Bedienungen in der Klammer, nach dem return, erfüllt sind. Sprich, wenn
-     shipCount für alle(!!) Schiffslängen die richtige Anzahl gezählt hat (z.B für length 2 ==4(Schiff)), dann true.*/
-    public boolean isFleetComplete()
-    {
-        return ((this.shipCount(2) == 4 && this.shipCount(3) == 3 && this.shipCount(4) == 2 && this.shipCount(5) == 1));//es gibt 4 2er ,3 3er  ,2 4er und 1 5er
+    public boolean isFleetComplete() {
+        return ((this.shipCount(2) == 4 &&
+                this.shipCount(3) == 3 &&
+                this.shipCount(4) == 2 &&
+                this.shipCount(5) == 1));
     }
 
     public boolean setShip(int x, int y, int length, Direction dire, int diffvectorx, int diffvectory) {
@@ -167,9 +157,8 @@ Schiff zutreffen und checkIfDestroyed (Ship-Klasse) true liefert, returned es da
 
     /*Verwendung: reset Methode in der Main. Wenn reset aufgerufen wird, wird removeAll aktiviert, bedeutet, dass wir
     eine neue ArrayList fleet erstellen (die alte wird gelöscht quasi).*/
-    public void removeAll()
-    {
-        this.fleet = new ArrayList<Ship>(0);
+    public void removeAll() {
+        this.fleet = new ArrayList<>(0);
     }
 
 
