@@ -1,47 +1,16 @@
 package at.ac.fhcampuswien.battleship;
 
+import at.ac.fhcampuswien.battleship.ship.Direction;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-//In der Klasse sind alle Eigenschaften, die ein Player hat
-public class Player
-{
+public class Player {
     Field area = new Field();
 
-    private ArrayList<AttackPositions> attackpositions = new ArrayList<>();
+    private ArrayList<Position> attackPositions = new ArrayList<>();
 
     private ArrayList<AIsave> AIsave = null;
-
-    /*SaveAttack speichert alle Attacken in die Arraylist*/
-    public void SaveAttack(int x, int y)
-    {
-        this.attackpositions.add(new AttackPositions(x, y));
-    }
-
-    /*Wir verhindern doppelten Angriff. Wir schauen, mit der foreach Schleife, ob die Übergebenen x,y von attackPossible
-    schon in einer der gespeicherten Stellen in unserer ArrayList attackpositions enthalten ist.*/
-    boolean attackPossible(int x, int y)
-    {
-        for (AttackPositions a : this.attackpositions)
-        {
-            if ((a.getX() == x) && (a.getY() == y))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /*Reset überschreibt unsere Klassenarraylist, die wir oben erstellt haben, mit einer Leeren Arraylist --> Resetet es*/
-    public void Reset()
-    {
-        this.attackpositions = new ArrayList<>();
-    }
-
-    public void setHuman(boolean human)
-    {
-        isHuman = human;
-    }
 
     private boolean isHuman;
 
@@ -50,12 +19,29 @@ public class Player
         this.isHuman = isHuman;
     }
 
+    public void saveAttack(int x, int y) {
+        this.attackPositions.add(new Position(x, y));
+    }
 
-    //Ab hier ist AI (ist nicht implementiert)
+    public boolean attackPossible(int x, int y) {
+        for (Position a : this.attackPositions) {
+            if ((a.getX() == x) && (a.getY() == y)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void reset(){
+        this.attackPositions = new ArrayList<>();
+    }
+
+    public void setHuman(boolean human) {
+        isHuman = human;
+    }
 
 
-    public boolean AISet()
-    {
+    public boolean AISet() {
         if (!isHuman)
         {
             return false;
@@ -75,8 +61,7 @@ public class Player
         }
     }
 
-    private void AISetting(int length)
-    {
+    private void AISetting(int length) {
         int x, y;
         Direction direction;
         Random random = new Random();
@@ -103,8 +88,7 @@ public class Player
         } while (this.area.setShip(x, y, length, direction, 0, 0));
     }
 
-    public boolean simpleAIAttack(Player enemy)
-    {
+    public boolean simpleAIAttack(Player enemy) {
         int x, y;
         Random random = new Random();
         do
@@ -112,25 +96,23 @@ public class Player
             x = random.nextInt((9 - 0) + 1) + 0;
             y = random.nextInt((9 - 0) + 1) + 0;
         } while (this.attackPossible(x, y));
-        this.SaveAttack(x, y);
+        this.saveAttack(x, y);
         return enemy.area.attack(x, y);
     }
 
-    public boolean complexAIAttack(Player enemy)
-    {
+    public boolean complexAIAttack(Player enemy) {
         Random random = new Random();
         boolean result;
         int x, y;
         Direction direction;
-        if (this.AIsave == null)
-        {
+        if (this.AIsave == null) {
 
             do
             {
                 x = random.nextInt((9 - 0) + 1) + 0;
                 y = random.nextInt((9 - 0) + 1) + 0;
             } while (this.attackPossible(x, y));
-            this.SaveAttack(x, y);
+            this.saveAttack(x, y);
             result = enemy.area.attack(x, y);
             if (enemy.area.isDestroyed(x, y) != null)
             {
@@ -171,7 +153,7 @@ public class Player
                 }
             } while (this.attackPossible(x, y));
             result = enemy.area.attack(x, y);
-            this.SaveAttack(x, y);
+            this.saveAttack(x, y);
             if (result)
             {
                 AIsave.add(new AIsave(x, y, direction, true));
@@ -201,7 +183,7 @@ public class Player
             }
             if (this.attackPossible(x, y))
             {
-                this.SaveAttack(x, y);
+                this.saveAttack(x, y);
                 result = enemy.area.attack(x, y);
                 if (result)
                 {
@@ -253,15 +235,9 @@ public class Player
                         AIsave = null;
                         return false;
                     }
-
                 }
             }
-
-
         }
-
-
         return false;
     }
-
 }

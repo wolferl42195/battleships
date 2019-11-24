@@ -1,5 +1,7 @@
 package at.ac.fhcampuswien.battleship;
 
+import at.ac.fhcampuswien.battleship.ship.Direction;
+
 public class AIsave
 {
     private int x,y;

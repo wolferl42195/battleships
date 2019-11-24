@@ -1,9 +1,13 @@
 package at.ac.fhcampuswien.battleship;
 
+import at.ac.fhcampuswien.battleship.ship.Direction;
+import at.ac.fhcampuswien.battleship.ship.Ship;
+import at.ac.fhcampuswien.battleship.ship.ShipPart;
+
 import java.util.ArrayList;
 
-public class Field
-{
+public class Field {
+
     private ArrayList<Ship> fleet = new ArrayList<>();
 
     public ArrayList<Ship> getFleet()
@@ -13,14 +17,10 @@ public class Field
 
     /*Überprüft für alle Schiffe und deren ShipParts(zweite For Schleife), ob sie auf den jeweils übergebenen x,y
     Koordinaten liegen.*/
-    private boolean isFree(int x, int y)
-    {
-        for (Ship warship : this.fleet)
-        {
-            for (ShipPart part : warship.getShipParts())
-            {
-                if (part.getX() == x && part.getY() == y)
-                {
+    private boolean isFree(int x, int y) {
+        for (Ship warship : this.fleet) {
+            for (ShipPart part : warship.getShipParts()) {
+                if (part.getX() == x && part.getY() == y) {
                     return false;
                 }
             }
@@ -29,8 +29,7 @@ public class Field
     }
 
     /*Überprüft, ob man setzen darf.*/
-    private boolean isAreaFree(int x, int y, int length, Direction dir)
-    {
+    private boolean isAreaFree(int x, int y, int length, Direction dir) {
         for (int i = 0; i < length; i++)
         {
             /*Hier, nimmt es die Koordinaten und prüft ob es innerhalb vom Spielfeld liegt. Wenn nicht, returned er false und
@@ -76,13 +75,10 @@ public class Field
     /*Es zählt wie viele Schiffe es in der Länge schon gibt, in der wir gerade anlegen wollen. Nimmt hier aber noch
     keine Rücksicht darauf, ob es schon 4 in der Länge 2 z.B schon gibt. Das passiert erst in der setShip Methode bzw
     . isFleetComplete. */
-    private int shipCount(int length)
-    {
+    private int shipCount(int length) {
         int count = 0;
-        for (Ship warship : this.fleet)
-        {
-            if (warship.getLength() == length)
-            {
+        for (Ship warship : this.fleet) {
+            if (warship.getLength() == length) {
                 count++;
             }
         }
