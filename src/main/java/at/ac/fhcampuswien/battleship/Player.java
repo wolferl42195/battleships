@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Player {
+
     Field area = new Field();
 
     private ArrayList<Position> attackPositions = new ArrayList<>();
@@ -23,9 +24,9 @@ public class Player {
         this.attackPositions.add(new Position(x, y));
     }
 
-    public boolean attackPossible(int x, int y) {
+    public boolean attackPossible(Position position) {
         for (Position a : this.attackPositions) {
-            if ((a.getX() == x) && (a.getY() == y)) {
+            if (a.equals(position)) {
                 return false;
             }
         }
@@ -42,11 +43,9 @@ public class Player {
 
 
     public boolean AISet() {
-        if (!isHuman)
-        {
+        if (!isHuman) {
             return false;
-        } else
-        {
+        } else {
             this.AISetting(2);
             this.AISetting(2);
             this.AISetting(2);
@@ -85,7 +84,7 @@ public class Player {
                     direction = Direction.DOWN;
                     break;
             }
-        } while (this.area.setShip(x, y, length, direction, 0, 0));
+        } while (this.area.setShip(new Position(x, y), length, direction, 0, 0));
     }
 
     public boolean simpleAIAttack(Player enemy) {
@@ -95,9 +94,9 @@ public class Player {
         {
             x = random.nextInt((9 - 0) + 1) + 0;
             y = random.nextInt((9 - 0) + 1) + 0;
-        } while (this.attackPossible(x, y));
+        } while (this.attackPossible(new Position(x, y)));
         this.saveAttack(x, y);
-        return enemy.area.attack(x, y);
+        return enemy.area.attack(new Position(x, y));
     }
 
     public boolean complexAIAttack(Player enemy) {
@@ -106,14 +105,13 @@ public class Player {
         int x, y;
         Direction direction;
         if (this.AIsave == null) {
-
             do
             {
                 x = random.nextInt((9 - 0) + 1) + 0;
                 y = random.nextInt((9 - 0) + 1) + 0;
-            } while (this.attackPossible(x, y));
+            } while (this.attackPossible(new Position(x, y)));
             this.saveAttack(x, y);
-            result = enemy.area.attack(x, y);
+            result = enemy.area.attack(new Position(x, y));
             if (enemy.area.isDestroyed(x, y) != null)
             {
                 return true;
@@ -123,7 +121,7 @@ public class Player {
             } else
             {
                 AIsave = new ArrayList<>();
-                AIsave.add(new AIsave(x, y, false));
+                AIsave.add(new AIsave(new Position(x, y), false));
             }
         } else if (AIsave.get(0).getDirection() == null)
         {
@@ -151,12 +149,12 @@ public class Player {
                         y++;
                         break;
                 }
-            } while (this.attackPossible(x, y));
-            result = enemy.area.attack(x, y);
+            } while (this.attackPossible(new Position(x, y)));
+            result = enemy.area.attack(new Position(x, y));
             this.saveAttack(x, y);
             if (result)
             {
-                AIsave.add(new AIsave(x, y, direction, true));
+                AIsave.add(new AIsave(new Position(x, y), direction, true));
                 return true;
             } else
             {
@@ -181,18 +179,17 @@ public class Player {
                     y -= (int) AIsave.size();
                     break;
             }
-            if (this.attackPossible(x, y))
+            if (this.attackPossible(new Position(x, y)))
             {
                 this.saveAttack(x, y);
-                result = enemy.area.attack(x, y);
+                result = enemy.area.attack(new Position(x, y));
                 if (result)
                 {
-                    AIsave.add(new AIsave(x, y, AIsave.get(0).getDirection(), false));
+                    AIsave.add(new AIsave(new Position(x, y), AIsave.get(0).getDirection(), false));
                     return result;
                 } else
                 {
-                    switch (AIsave.get(0).getDirection())
-                    {
+                    switch (AIsave.get(0).getDirection()) {
                         case RIGHT:
                             x--;
                             break;
@@ -206,12 +203,10 @@ public class Player {
                             y++;
                             break;
                     }
-                    if (this.attackPossible(x, y))
-                    {
+                    if (this.attackPossible(new Position(x, y))) {
                         AIsave a = AIsave.get(0);
                         direction = Direction.LEFT;
-                        switch (AIsave.get(0).getDirection())
-                        {
+                        switch (AIsave.get(0).getDirection()) {
                             case RIGHT:
                                 direction = Direction.LEFT;
                                 break;
@@ -228,7 +223,7 @@ public class Player {
                         a.setDirection(direction);
                         AIsave = new ArrayList<>();
                         AIsave.add(a);
-                        AIsave.add(new AIsave(x, y, direction, false));
+                        AIsave.add(new AIsave(new Position(x, y), direction, false));
                         return true;
                     } else
                     {

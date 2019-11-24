@@ -80,7 +80,7 @@ public class Field {
                 this.shipCount(5) == 1));
     }
 
-    public boolean setShip(int x, int y, int length, Direction dire, int diffvectorx, int diffvectory) {
+    public boolean setShip(Position position, int length, Direction direction, int diffvectorx, int diffvectory) {
         switch (length) {
             case 2:
                 if (this.shipCount(length) >= 4) {
@@ -111,9 +111,8 @@ public class Field {
         Klasse Ship (also ein Schiff) zu unserer ArrayList fleet mittels dem Konstruktor der Klasse Ship. Wieso
         diffvectorx und y? Das steht in der main bei der Methode saveShips dabei.*/
 
-        if (isAreaFree(new Position(x, y), length, dire)) {
-            Position position = new Position(x, y);
-            this.fleet.add(new Ship(position, length, dire, diffvectorx, diffvectory));
+        if (isAreaFree(position, length, direction)) {
+            this.fleet.add(new Ship(position, length, direction, diffvectorx, diffvectory));
             return true;
         }
         return false;
@@ -122,8 +121,7 @@ public class Field {
     /*Es überprüft für jedes Schiff der Flotte (ArrayList mit Schiffen) ob die x,y Koordinaten zutreffen. Wenn ja,
     dann werden die Koordinaten weitergegeben und die attack Methode in der Klasse Ship überprüft das gleiche für
     jeden ShipPart.*/
-    public boolean attack(int x, int y) {
-        Position position = new Position(x,y);
+    public boolean attack(Position position) {
         for (Ship warship : this.fleet) {
             if (warship.attack(position)) {
                 return true;

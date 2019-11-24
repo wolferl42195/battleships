@@ -334,7 +334,7 @@ public class Main extends Application {
                 int a[] = calculateXY(imageship.getX(), imageship.getY(), p1x, p1y, p2x, p2y);
 
                 if (a != null) {
-                    if (player.area.setShip(a[0], a[1], imageship.getLength(), imageship.getDirection(), imageship.getDiffvectorx(), imageship.getDiffvectory())) {
+                    if (player.area.setShip(new Position(a[0], a[1]), imageship.getLength(), imageship.getDirection(), imageship.getDiffvectorx(), imageship.getDiffvectory())) {
                         imageship.lock();
 
                     } else {
@@ -372,8 +372,8 @@ public class Main extends Application {
                 if (gameRound % 2 == 1) {
                     a = calculateXY(x, y, 440 + 40, 40 + 40, 440 + 440, 440 + 40);
                     if (a != null) {
-                        if (player1.attackPossible(a[0], a[1])) {
-                            if (player2.area.attack(a[0], a[1])) {
+                        if (player1.attackPossible(new Position(a[0], a[1]))) {
+                            if (player2.area.attack(new Position(a[0], a[1]))) {
                                 drawAttack(a[0], a[1], x, y, player2);
                                 player1.saveAttack(a[0], a[1]);
                                 activateMask();
@@ -410,8 +410,8 @@ public class Main extends Application {
                 } else {
                     a = calculateXY(x, y, 440 + 40 + 10 * 40 + 2 * 40, 40 + 40, 440 + 440 + 440 + 40, 440 + 40);
                     if (a != null) {
-                        if (player2.attackPossible(a[0], a[1])) {
-                            if (player1.area.attack(a[0], a[1])) {
+                        if (player2.attackPossible(new Position(a[0], a[1]))) {
+                            if (player1.area.attack(new Position(a[0], a[1]))) {
                                 drawAttack(a[0], a[1], x, y, player1);
                                 player2.saveAttack(a[0], a[1]);
                                 activateMask();

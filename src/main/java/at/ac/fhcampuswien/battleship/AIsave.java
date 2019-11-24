@@ -2,20 +2,34 @@ package at.ac.fhcampuswien.battleship;
 
 import at.ac.fhcampuswien.battleship.ship.Direction;
 
-public class AIsave
-{
-    private int x,y;
+public class AIsave {
+
+    private Position position;
+
     private Direction direction;
+
     private boolean water;
+
+    public AIsave(Position position, boolean water) {
+        this.position = position;
+        this.water = water;
+        direction=null;
+    }
+
+    public AIsave(Position position,  Direction direction, boolean water) {
+        this.position = position;
+        this.direction = direction;
+        this.water = water;
+    }
 
     public int getX()
     {
-        return x;
+        return position.getX();
     }
 
     public int getY()
     {
-        return y;
+        return position.getY();
     }
 
     public Direction getDirection()
@@ -38,32 +52,4 @@ public class AIsave
         this.water = water;
     }
 
-    public AIsave(int x, int y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-
-    public AIsave(int x, int y, Direction direction)
-    {
-        this.x = x;
-        this.y = y;
-        this.direction = direction;
-    }
-
-    public AIsave(int x, int y, boolean water)
-    {
-        this.x = x;
-        this.y = y;
-        this.water = water;
-        direction=null;
-    }
-
-    public AIsave(int x, int y, Direction direction, boolean water)
-    {
-        this.x = x;
-        this.y = y;
-        this.direction = direction;
-        this.water = water;
-    }
 }
