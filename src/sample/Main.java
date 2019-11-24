@@ -28,7 +28,7 @@ public class Main extends Application
     private int gameround = 1;
     private boolean shipscomplete = false; //zu testzwecken auf true später muss auf false gestellt werden
 
-    private Button buttonSaveShipsLeft = new Button("Schiffe speichern");
+    private Button buttonSaveShipsLeft  = new Button("Schiffe speichern");
     private Button buttonSaveShipsRight = new Button("Schiffe Speichern");
     private Button newGame = new Button("Neues Spiel");
     private Button exit = new Button("Ka Lust mehr! EXIT");
