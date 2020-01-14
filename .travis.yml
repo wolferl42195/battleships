@@ -10,7 +10,7 @@ services:
   - docker
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login  -u "$DOCKER_USERNAME" --password-stdin
-  - docker pull openjdk:11-jdk-alpine
+  - docker pull openjdk:11-jdk
 
 script:
   #We avoid this error :" the job exceeded the maximum log length and has been terminated "
