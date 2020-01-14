@@ -1,6 +1,7 @@
 # Start with a base image containing Java runtime
 FROM openjdk:11-jdk
 
+
 # Add Maintainer Info
 LABEL maintainer="wolfgang.radinger@gmail.com"
 
