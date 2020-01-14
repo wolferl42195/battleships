@@ -21,6 +21,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <!-- GitHub OAuth token & server -->
+        <github.global.server>github</github.global.server>
+        <github.global.oauth2Token>786f7b3a3ca9324dfee570589b0a519f8948a313</github.global.oauth2Token>
+
+
     </properties>
 
     <dependencies>
