@@ -13,42 +13,36 @@ public class AIsave {
     public AIsave(Position position, boolean water) {
         this.position = position;
         this.water = water;
-        direction=null;
+        direction = null;
     }
 
-    public AIsave(Position position,  Direction direction, boolean water) {
+    public AIsave(Position position, Direction direction, boolean water) {
         this.position = position;
         this.direction = direction;
         this.water = water;
     }
 
-    public int getX()
-    {
+    public int getX() {
         return position.getX();
     }
 
-    public int getY()
-    {
+    public int getY() {
         return position.getY();
     }
 
-    public Direction getDirection()
-    {
+    public Direction getDirection() {
         return direction;
     }
 
-    public boolean isWater()
-    {
+    public boolean isWater() {
         return water;
     }
 
-    public void setDirection(Direction direction)
-    {
+    public void setDirection(Direction direction) {
         this.direction = direction;
     }
 
-    public void setWater(boolean water)
-    {
+    public void setWater(boolean water) {
         this.water = water;
     }
 

@@ -22,10 +22,16 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+
 import static at.ac.fhcampuswien.battleship.BattleShipConstants.*;
 
 
 public class Main extends Application {
+
+    static Logger logger = LogManager.getLogger("Main");
 
     private Player player1 = new Player(true);
     private Player player2 = new Player(true);
@@ -33,7 +39,7 @@ public class Main extends Application {
     private int gameRound = 1;
     private boolean shipsComplete = false;
 
-    private Button buttonSaveShipsLeft  = new Button(TEXT_SAVE_SHIPS);
+    private Button buttonSaveShipsLeft = new Button(TEXT_SAVE_SHIPS);
     private Button buttonSaveShipsRight = new Button(TEXT_SAVE_SHIPS);
     private Button newGame = new Button(TEXT_NEW_GAME);
     private Button exit = new Button(TEXT_EXIT_GAME);
@@ -124,11 +130,9 @@ public class Main extends Application {
         buttonSaveShipsLeft.setLayoutY(500);
         buttonSaveShipsLeft.setPrefSize(120, 10);
 
-        buttonSaveShipsLeft.setOnAction(new EventHandler<ActionEvent>()
-                                        {
+        buttonSaveShipsLeft.setOnAction(new EventHandler<ActionEvent>() {
                                             @Override
-                                            public void handle(ActionEvent event)
-                                            {
+                                            public void handle(ActionEvent event) {
                                                 saveShips(imageShip0, player1, 440 + 40, 40 + 440 + 40 + 40, 440 + 440, 40 + 920);
                                                 shipsComplete();
                                             }
@@ -140,13 +144,12 @@ public class Main extends Application {
         buttonSaveShipsRight.setLayoutY(500);
         buttonSaveShipsRight.setPrefSize(120, 10);
         buttonSaveShipsRight.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event)
-                    {
-                        saveShips(imageShip1, player2, 2 * 440 + 40 + 40, 40 + 440 + 40 + 40, 440 + 440 + 40 + 440, 920 + 40);
-                        shipsComplete();
-                    }
-                }
+                                             @Override
+                                             public void handle(ActionEvent event) {
+                                                 saveShips(imageShip1, player2, 2 * 440 + 40 + 40, 40 + 440 + 40 + 40, 440 + 440 + 40 + 440, 920 + 40);
+                                                 shipsComplete();
+                                             }
+                                         }
         );
 
 
@@ -154,14 +157,12 @@ public class Main extends Application {
         seeShips1.setLayoutX(1520);
         seeShips1.setLayoutY(550);
         seeShips1.setPrefSize(120, 10);
-        seeShips1.setOnAction(new EventHandler<ActionEvent>()
-                {
-                    @Override
-                    public void handle(ActionEvent event)
-                    {
-                        changeMask();
-                    }
-                }
+        seeShips1.setOnAction(new EventHandler<ActionEvent>() {
+                                  @Override
+                                  public void handle(ActionEvent event) {
+                                      changeMask();
+                                  }
+                              }
         );
 
         seeShips2.setLayoutX(160);
@@ -170,8 +171,7 @@ public class Main extends Application {
         seeShips2.setOnAction(
                 new EventHandler<ActionEvent>() {
                     @Override
-                    public void handle(ActionEvent event)
-                    {
+                    public void handle(ActionEvent event) {
                         changeMask();
                     }
                 }
@@ -217,7 +217,7 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage)  {
+    public void start(Stage primaryStage) {
         BackgroundImage background = new BackgroundImage(new Image(FILE_BACKGROUND, 1800, 1000,
                 true, true), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
@@ -234,12 +234,10 @@ public class Main extends Application {
         reset.setLayoutY(10);
         reset.setPrefHeight(10);
 
-        reset.setOnAction(new EventHandler<ActionEvent>()
-        {
+        reset.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
-            public void handle(ActionEvent event)
-            {
+            public void handle(ActionEvent event) {
                 reset();
                 Scene scenel = new Scene(battleShipContainer, 1800, 1000);
                 primaryStage.setScene(scenel);
@@ -252,11 +250,9 @@ public class Main extends Application {
         newGame.setMinSize(400, 150);
         Font font = new Font(30);
         newGame.setFont(font);
-        newGame.setOnAction(new EventHandler<ActionEvent>()
-                            {
+        newGame.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
-                                public void handle(ActionEvent event)
-                                {
+                                public void handle(ActionEvent event) {
                                     reset();
                                     Scene scenel = new Scene(battleShipContainer, 1800, 1000);
                                     primaryStage.setScene(scenel);
@@ -272,11 +268,9 @@ public class Main extends Application {
         exit.setLayoutY(500);
         exit.setMinSize(400, 150);
         exit.setFont(font);
-        exit.setOnAction(new EventHandler<ActionEvent>()
-                         {
+        exit.setOnAction(new EventHandler<ActionEvent>() {
                              @Override
-                             public void handle(ActionEvent event)
-                             {
+                             public void handle(ActionEvent event) {
                                  System.exit(0);
                              }
                          }
@@ -285,11 +279,9 @@ public class Main extends Application {
 
         battleShipContainer.getChildren().add(exit);
         cont.setOnAction(
-                new EventHandler<ActionEvent>()
-                {
+                new EventHandler<ActionEvent>() {
                     @Override
-                    public void handle(ActionEvent event)
-                    {
+                    public void handle(ActionEvent event) {
                         reset();
                         reset.setVisible(false);
                         battleShipContainer.getChildren().add(newGame);
@@ -560,6 +552,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        logger.info("Start");
         launch(args);
     }
 }

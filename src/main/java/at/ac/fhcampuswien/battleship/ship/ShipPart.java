@@ -13,7 +13,7 @@ public class ShipPart {
         this.damage = false;
     }
 
-    public Position getPosition(){
+    public Position getPosition() {
         return position;
     }
 

@@ -1,5 +1,4 @@
 package at.ac.fhcampuswien.battleship;
 
-public class Controller
-{
+public class Controller {
 }

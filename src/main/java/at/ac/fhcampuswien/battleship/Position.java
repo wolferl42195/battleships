@@ -1,23 +1,17 @@
 package at.ac.fhcampuswien.battleship;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.ToString;
+
+@Data
+@AllArgsConstructor
+@ToString
 public class Position {
 
     private int x;
 
     private int y;
-
-    public Position(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
 
     public boolean equals(Position position) {
         return position.getX() == getX() && position.getY() == getY();

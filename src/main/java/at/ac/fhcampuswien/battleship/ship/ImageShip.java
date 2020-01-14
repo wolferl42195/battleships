@@ -29,73 +29,59 @@ public class ImageShip {
 
     private boolean disable = false;
 
-    private void setDiffVectorX(int diffVectorX)
-    {
+    private void setDiffVectorX(int diffVectorX) {
         this.diffVectorX = diffVectorX;
     }
 
-    private void setDiffVectorY(int diffVectorY)
-    {
+    private void setDiffVectorY(int diffVectorY) {
         this.diffVectorY = diffVectorY;
     }
 
-    private void setX(int x)
-    {
+    private void setX(int x) {
         this.x = x;
     }
 
-    private void setY(int y)
-    {
+    private void setY(int y) {
         this.y = y;
     }
 
-    public int getDiffVectorX()
-    {
+    public int getDiffVectorX() {
         return diffVectorX;
     }
 
-    public int getDiffVectorY()
-    {
+    public int getDiffVectorY() {
         return diffVectorY;
     }
 
-    public Direction getDirection()
-    {
+    public Direction getDirection() {
         return direction;
     }
 
-    public int getX()
-    {
+    public int getX() {
         return x;
     }
 
-    public int getY()
-    {
+    public int getY() {
         return y;
     }
 
-    public int getLength()
-    {
+    public int getLength() {
         return length;
     }
 
-    public ImageView getImageView()
-    {
+    public ImageView getImageView() {
         return imageView;
     }
 
-    public int getBeginX()
-    {
+    public int getBeginX() {
         return beginX;
     }
 
-    public int getBeginY()
-    {
+    public int getBeginY() {
         return beginY;
     }
 
-    public Image getImage()
-    {
+    public Image getImage() {
         return image;
     }
 
@@ -175,14 +161,12 @@ public class ImageShip {
 
     /*Gelocked wird, wenn saveShips in der main ein Schiff gespeichert wird oder wenn ein zerstörtes Schiff
     gezeichnet wird. Dient dafür, dass man es nicht mehr draggen kann.*/
-    public void lock()
-    {
+    public void lock() {
         this.disable = true;
     }
 
 
-    public boolean isDisable()
-    {
+    public boolean isDisable() {
         return this.disable;
     }
 

@@ -16,8 +16,7 @@ public class Player {
 
     private boolean isHuman;
 
-    Player(boolean isHuman)
-    {
+    Player(boolean isHuman) {
         this.isHuman = isHuman;
     }
 
@@ -34,7 +33,7 @@ public class Player {
         return true;
     }
 
-    public void reset(){
+    public void reset() {
         this.attackPositions = new ArrayList<>();
     }
 
@@ -42,21 +41,21 @@ public class Player {
         isHuman = human;
     }
 
-   public boolean setShip(Position position, int length, Direction direction, int diffvectorx, int diffvectory) {
+    public boolean setShip(Position position, int length, Direction direction, int diffvectorx, int diffvectory) {
         return area.setShip(position, length, direction, diffvectorx, diffvectory);
-   }
+    }
 
-   public boolean isFleetComplete(){
+    public boolean isFleetComplete() {
         return area.isFleetComplete();
-   }
+    }
 
-   public boolean checkGameOver(){
+    public boolean checkGameOver() {
         return area.checkGameOver();
-   }
+    }
 
-   public void  removeAll(){
+    public void removeAll() {
         area.removeAll();
-   }
+    }
 
     public boolean attack(Position position) {
         return area.attack(position);
@@ -84,13 +83,11 @@ public class Player {
         int x, y;
         Direction direction;
         Random random = new Random();
-        do
-        {
+        do {
             x = random.nextInt((9 - 0) + 1) + 0;
             y = random.nextInt((9 - 0) + 1) + 0;
             direction = Direction.RIGHT;
-            switch (random.nextInt((3 - 0) + 1) + 0)
-            {
+            switch (random.nextInt((3 - 0) + 1) + 0) {
                 case 0:
                     direction = Direction.RIGHT;
                     break;
@@ -110,8 +107,7 @@ public class Player {
     public boolean simpleAIAttack(Player enemy) {
         int x, y;
         Random random = new Random();
-        do
-        {
+        do {
             x = random.nextInt((9 - 0) + 1) + 0;
             y = random.nextInt((9 - 0) + 1) + 0;
         } while (this.attackPossible(new Position(x, y)));
@@ -125,8 +121,7 @@ public class Player {
         int x, y;
         Direction direction;
         if (this.AIsave == null) {
-            do
-            {
+            do {
                 x = random.nextInt((9 - 0) + 1) + 0;
                 y = random.nextInt((9 - 0) + 1) + 0;
             } while (this.attackPossible(new Position(x, y)));
@@ -233,8 +228,7 @@ public class Player {
                         AIsave.add(a);
                         AIsave.add(new AIsave(new Position(x, y), direction, false));
                         return true;
-                    } else
-                    {
+                    } else {
                         AIsave = null;
                         return false;
                     }

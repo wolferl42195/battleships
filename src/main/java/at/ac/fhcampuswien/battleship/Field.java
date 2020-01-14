@@ -33,7 +33,7 @@ public class Field {
                     y < BattleShipConstants.MIN_FIELD_INDEX || y > BattleShipConstants.MAX_FIELD_INDEX) {
                 return false;
             }
-            if (!this.isFree(new Position(x,y))) {
+            if (!this.isFree(new Position(x, y))) {
                 return false;
             }
 
@@ -124,10 +124,10 @@ public class Field {
     }
 
 
-/*Checkt für jeden ShipPart jedes Schiffes im fleet ArrayList, ob es destroyed ist. Wenn x und y auf ein ganzes
-Schiff zutreffen und checkIfDestroyed (Ship-Klasse) true liefert, returned es das zerstörte Schiff, ansonsten null.*/
+    /*Checkt für jeden ShipPart jedes Schiffes im fleet ArrayList, ob es destroyed ist. Wenn x und y auf ein ganzes
+    Schiff zutreffen und checkIfDestroyed (Ship-Klasse) true liefert, returned es das zerstörte Schiff, ansonsten null.*/
     public Ship isDestroyed(Position position) {
-        for (Ship ship : this.fleet){
+        for (Ship ship : this.fleet) {
             for (ShipPart part : ship.getShipParts()) {
                 if (part.getPosition().equals(position) && ship.checkIfDestroyed()) {
                     return ship;
@@ -152,8 +152,7 @@ Schiff zutreffen und checkIfDestroyed (Ship-Klasse) true liefert, returned es da
     }
 
     /**
-     *  The whole fleet will be deleted
-     *
+     * The whole fleet will be deleted
      */
     public void removeAll() {
         this.fleet = new ArrayList<>(0);
