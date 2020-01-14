@@ -16,6 +16,7 @@
         <maven.compiler.release>11</maven.compiler.release>
         <javafx.version>13</javafx.version>
 
+        <docker.image.prefix>wolferl42195</docker.image.prefix>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -99,6 +100,33 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M4</version>
             </plugin>
+
+            <!-- spotify's dockerfile-maven-plugin -->
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.9</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+
+                    <serverId>index.docker.io</serverId>
+                    <registryUrl>https://index.docker.io:443/v1/</registryUrl>
+                </configuration>
+            </plugin>
+
+            <!-- maven-dependency-plugin useful for creating docker image -->
+
         </plugins>
     </build>
 </project>
